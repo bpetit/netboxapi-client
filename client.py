@@ -165,13 +165,12 @@ def show(api=None, **kwargs):
     Calls api object and its get function (and optionally get_id_by_name).
     Displays response as json data.
     """
-    if 'ident' in kwargs:
+    if 'ident' in kwargs and kwargs['ident'] is not None:
         ident = kwargs['ident']
-    elif 'name' in kwargs and kwargs['name'] is not None:
+    elif "name" in kwargs:
         ident = api.get_id_by_name(
             "{}/{}".format(kwargs['model'], kwargs['obj']), kwargs['name']
         )
-    print("DEBUG: {}/{}/{}".format(kwargs['model'], kwargs['obj'], ident))
     pprint(
         api.get(
             "{}/{}/{}".format(
@@ -186,9 +185,9 @@ def get(api=None, **kwargs):
     Calls api object and its get function (and optionally get_id_by_name).
     Displays response as json data.
     """
-    if 'ident' in kwargs:
+    if 'ident' in kwargs and kwargs['ident'] is not None:
         ident = kwargs['ident']
-    elif 'name' in kwargs and kwargs['name'] is not None:
+    elif 'name' in kwargs:
         ident = api.get_id_by_name(
             "{}/{}".format(kwargs['model'], kwargs['obj']), kwargs['name']
         )
@@ -217,11 +216,15 @@ def create(api=None, **kwargs):
 
     :param **kwargs:
     """
+    res = None
     if 'model' and 'obj' and 'data' in kwargs:
-        pprint(api.post(
+        res = api.post(
             path="{}/{}/".format(kwargs['model'], kwargs['obj']),
-            payload=kwargs['data']).json()
-        )
+            payload=kwargs['data']
+        ).json()
+        pprint(res)
+    return res
+
 
 
 def delete(api=None, **kwargs):
