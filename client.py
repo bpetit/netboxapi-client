@@ -294,16 +294,18 @@ def main():
     requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--url",
-        help="URL of the target Netbox instance",
-        dest='url'
-    )
-    parser.add_argument(
-        "--token",
-        help="Token that should be used for authentication",
-        dest='token'
-    )
+
+    ## NOT IMPLEMENTED YET
+    #parser.add_argument(
+    #    "--url",
+    #    help="URL of the target Netbox instance",
+    #    dest='url'
+    #)
+    #parser.add_argument(
+    #    "--token",
+    #    help="Token that should be used for authentication",
+    #    dest='token'
+    #)
 
     config = get_configuration()
     pprint(config)
