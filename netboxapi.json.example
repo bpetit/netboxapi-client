@@ -1,0 +1,4 @@
+{
+  "url": "https://netbox.example.org",
+  "token": "thisisatokenyoucangetfromthewebinterfacesettingspage"
+}
