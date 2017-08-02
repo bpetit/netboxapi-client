@@ -287,7 +287,7 @@ def get_configuration(path='netboxapi.json'):
     try:
         with open(path) as fd:
             return json.load(fd)
-    except os.FileNotFoundError as fne:
+    except OSError as fne:
         sys.exit(254)
         pprint(fne)
 
