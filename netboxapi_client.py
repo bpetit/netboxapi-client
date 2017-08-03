@@ -197,15 +197,17 @@ def get(api=None, **kwargs):
             )
         ).json()
 
-def enum(api=None, **kwargs):
+def enum(api=None, model=None, obj=None, **kwargs):
     """enum
 
     Displays all instances of an object, as json data.
 
     :param **kwargs:
     """
-    if 'model' and 'obj' in kwargs:
-        pprint(api.get("{}/{}/".format(kwargs['model'], kwargs['obj'])).json())
+    if model and obj:
+        res = api.get("{}/{}/".format(model, obj)).json()
+        pprint(res)
+        return res
 
 
 def create(api=None, **kwargs):
