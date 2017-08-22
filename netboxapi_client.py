@@ -209,6 +209,17 @@ def enum(api=None, model=None, obj=None, **kwargs):
         pprint(res)
         return res
 
+def get_list(api=None, model=None, obj=None, **kwargs):
+    """enum
+
+    Displays all instances of an object, as json data.
+
+    :param **kwargs:
+    """
+    if model and obj:
+        res = api.get("{}/{}/".format(model, obj)).json()
+        return res
+
 
 def create(api=None, **kwargs):
     """create
@@ -223,8 +234,7 @@ def create(api=None, **kwargs):
         res = api.post(
             path="{}/{}/".format(kwargs['model'], kwargs['obj']),
             payload=kwargs['data']
-        ).json()
-        pprint(res)
+        )
     return res
 
 
@@ -270,12 +280,11 @@ def update(api=None, **kwargs):
             kwargs['model'], kwargs['obj']), kwargs['name']
         )
     path = "{}/{}/{}".format(kwargs['model'], kwargs['obj'], ident)
-    pprint(kwargs['data'])
     res = api.put(
         path=path,
         payload=kwargs['data']
     )
-    pprint(res.json())
+    return res
 
 
 def get_configuration(path='netboxapi.json'):
@@ -380,13 +389,15 @@ def main():
     pprint(ns)
     if 'action' in ns:
         if 'data' in ns and ns.data:
-                FUNCTION_MAP[ns.action](
-                    api=api,
-                    model=ns.model,
-                    obj=ns.object,
-                    ident=ns.id,
-                    name=ns.name,
-                    data=json.loads(ns.data)
+                pprint(
+                    FUNCTION_MAP[ns.action](
+                        api=api,
+                        model=ns.model,
+                        obj=ns.object,
+                        ident=ns.id,
+                        name=ns.name,
+                        data=json.loads(ns.data)
+                    ).json()
                 )
         else:
             FUNCTION_MAP[ns.action](
