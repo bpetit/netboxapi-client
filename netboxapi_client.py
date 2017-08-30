@@ -149,7 +149,7 @@ class Api(object):
         """
         try:
             self.__last_reply = requests.put(
-                "{0}/api/{1}".format(self.__url, path),
+                "{0}/api/{1}/".format(self.__url, path),
                 headers=self.__headers, data=json.dumps(payload),
                 verify=False
             )
