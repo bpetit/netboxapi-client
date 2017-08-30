@@ -252,6 +252,8 @@ def delete(api=None, **kwargs):
         ident = api.get_id_by_name("{}/{}".format(
             kwargs['model'], kwargs['obj']), kwargs['name']
         )
+    else:
+        ident=kwargs['ident']
     res = api.delete(
         path="{}/{}/{}".format(kwargs['model'], kwargs['obj'], ident)
     )
