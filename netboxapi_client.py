@@ -261,7 +261,8 @@ def delete(api=None, **kwargs):
         # Response.json() raises an exception when there is no data,
         #and it seems normal: https://github.com/requests/requests/issues/4186
         pprint(res.json())
-    except ValueError:
+    except ValueError as ve:
+        logging.warning("Response Exception: {}".format(ve))
         pprint(res)
 
 
