@@ -52,7 +52,7 @@ class Api(object):
             self.__last_reply.reason,
             self.__last_reply.request.headers,
             self.__last_reply.request.body,
-            self.__last_reply.text
+            self.__last_reply.text.encode('utf-8')
             )
         )
 
@@ -204,10 +204,9 @@ def enum(api=None, model=None, obj=None, **kwargs):
 
     :param **kwargs:
     """
-    if model and obj:
-        res = api.get("{}/{}/".format(model, obj)).json()
-        pprint(res)
-        return res
+    res = get_list(api, model, obj)
+    pprint(res)
+    return res
 
 def get_list(api=None, model=None, obj=None, **kwargs):
     """enum
