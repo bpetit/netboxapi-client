@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import unittest
-from netboxapi_client import Api, enum
+from netboxapi_client import Api, enum, get_list
 from pprint import pprint
 
 TOKEN = "2b2b00559b133a499c027e6a60efd7b0e87a6876"
@@ -23,7 +23,6 @@ class BasicTest(unittest.TestCase):
     Tests if the client is able to list all models.
     """
     res = self.__api.get('').json()
-    pprint(res)
     for model in self.__models:
       self.assertIn(model, res.keys())
 
@@ -40,6 +39,20 @@ class BasicTest(unittest.TestCase):
     Tests if the client is able to list all objects of a given type.
     """
     res = enum(self.__api, model="ipam", obj="aggregates")
+    self.assertTrue(type(res['results']) is list)
+    self.assertGreaterEqual(len(res['results']), 1)
+
+  def test_enum_no_objects(self):
+    """
+    """
+    res = enum(self.__api, model="dcim", obj="devices")
+    self.assertTrue(type(res['results']) is list)
+    self.assertEqual(len(res['results']), 0)
+
+  def test_get_list_objects(self):
+    """
+    """
+    res = get_list(self.__api, model="ipam", obj="aggregates")
     self.assertTrue(type(res['results']) is list)
     self.assertGreaterEqual(len(res['results']), 1)
 
