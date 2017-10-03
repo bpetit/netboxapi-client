@@ -200,7 +200,7 @@ def get(api=None, **kwargs):
 def enum(api=None, model=None, obj=None, **kwargs):
     """enum
 
-    Displays all instances of an object, as json data.
+    Displays and returns all instances of an object, as json data.
 
     :param **kwargs:
     """
@@ -211,7 +211,7 @@ def enum(api=None, model=None, obj=None, **kwargs):
 def get_list(api=None, model=None, obj=None, **kwargs):
     """enum
 
-    Displays all instances of an object, as json data.
+    Returns all instances of an object, as json data.
 
     :param **kwargs:
     """
