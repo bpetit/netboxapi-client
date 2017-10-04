@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import unittest
-from netboxapi_client import Api, enum, get_list
+from netboxapi_client import Api, enum, get_list, create, delete, get
 from pprint import pprint
 
 TOKEN = "2b2b00559b133a499c027e6a60efd7b0e87a6876"
@@ -15,6 +15,8 @@ class BasicTest(unittest.TestCase):
     url=URL,
     token=TOKEN
   )
+
+  __last_id = None
 
   __models = ['circuits', 'dcim', 'ipam', 'extras', 'tenancy']
 
@@ -55,6 +57,37 @@ class BasicTest(unittest.TestCase):
     res = get_list(self.__api, model="ipam", obj="aggregates")
     self.assertTrue(type(res['results']) is list)
     self.assertGreaterEqual(len(res['results']), 1)
+
+  def test_delete_absent_object(self):
+    res = delete(self.__api, model="dcim", obj="sites", ident=1)
+    pprint(res)
+
+  def test_create_object(self):
+    """
+    """
+    res = create(
+      self.__api, model="dcim", obj="sites",
+      data={ 'name': 'testsite9', 'slug': 'testsite9' }
+    )
+    self.assertIn('id', res.json().keys())
+    self.__last_id = res.json()['id']
+
+#  def test_get_object(self):
+#    """
+#    """
+#    res = get(
+#      
+#    )
+
+  def test_delete_object_by_name(self):
+    """
+    """
+    res = delete(
+      self.__api, model="dcim", obj="sites",
+      name='testsite9'
+    )
+
+    pprint(res.text)
 
 if __name__ == '__main__':
   unittest.main()
