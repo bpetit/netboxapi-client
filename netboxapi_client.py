@@ -225,6 +225,7 @@ def create(api=None, **kwargs):
 
     Calls api object post function in order to create a new object.
     Returns response as json data.
+    TODO: raise an exception if parameters are not good.
 
     :param **kwargs:
     """
@@ -256,6 +257,7 @@ def delete(api=None, **kwargs):
     res = api.delete(
         path="{}/{}/{}".format(kwargs['model'], kwargs['obj'], ident)
     )
+    return res
     try:
         # Response.json() raises an exception when there is no data,
         #and it seems normal: https://github.com/requests/requests/issues/4186
