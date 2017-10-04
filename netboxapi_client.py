@@ -159,41 +159,33 @@ class Api(object):
             logging.warning("Certificate verify failed.")
 
 
-def show(api=None, **kwargs):
+def show(api=None, ident=None, name=None, model=None, obj=None, **kwargs):
     """show
 
     Calls api object and its get function (and optionally get_id_by_name).
-    Displays response as json data.
+    Displays and returns response as json data.
     """
-    if 'ident' in kwargs and kwargs['ident'] is not None:
-        ident = kwargs['ident']
-    elif "name" in kwargs:
-        ident = api.get_id_by_name(
-            "{}/{}".format(kwargs['model'], kwargs['obj']), kwargs['name']
-        )
-    pprint(
-        api.get(
+    res = api.get(
             "{}/{}/{}".format(
-                kwargs['model'], kwargs['obj'], ident
+                model, obj, ident
             )
         ).json()
-    )
+    pprint(res)
+    return res
 
-def get(api=None, **kwargs):
+def get(api=None, ident=None, name=None, model=None, obj=None, **kwargs):
     """show
 
     Calls api object and its get function (and optionally get_id_by_name).
-    Displays response as json data.
+    Returns response as json data.
     """
-    if 'ident' in kwargs and kwargs['ident'] is not None:
-        ident = kwargs['ident']
-    elif 'name' in kwargs:
+    if ident is None and name is not None:
         ident = api.get_id_by_name(
-            "{}/{}".format(kwargs['model'], kwargs['obj']), kwargs['name']
+            "{}/{}".format(model, obj), name
         )
     return api.get(
             "{}/{}/{}".format(
-                kwargs['model'], kwargs['obj'], ident
+                model, obj, ident
             )
         ).json()
 
