@@ -226,7 +226,7 @@ def create(api=None, **kwargs):
         res = api.post(
             path="{}/{}/".format(kwargs['model'], kwargs['obj']),
             payload=kwargs['data']
-        )
+        ).json()
     return res
 
 

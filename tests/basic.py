@@ -67,23 +67,23 @@ class BasicTest(unittest.TestCase):
             self.__api, model="dcim", obj="sites",
             data={ 'name': 'testsite9', 'slug': 'testsite9' }
         )
-        self.assertIn('id', res.json().keys())
-        self.__last_id = res.json()['id']
+        self.assertIn('id', res.keys())
+        self.__last_id = res['id']
 
     def test_get_object(self):
-        """
-        """
         res = get(
             self.__api, model="ipam", obj="aggregates",
             ident=1
         )
+        self.assertTrue(type(res) is dict)
+        self.assertGreater(len(res), 1)
 
     def test_crud_object(self):
         res = create(
             self.__api, model="dcim", obj="sites",
             data={ 'name': 'ohvi7Xiew6VohSee1ael', 'slug': 'ohvi7Xiew6VohSee1ael' }
         )
-        self.__last_id = res.json()['id']
+        self.__last_id = res['id']
         res = delete(
             self.__api, model="dcim", obj="sites",
             name='ohvi7Xiew6VohSee1ael'
