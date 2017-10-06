@@ -252,7 +252,7 @@ def delete(api=None, **kwargs):
     return res
     try:
         # Response.json() raises an exception when there is no data,
-        #and it seems normal: https://github.com/requests/requests/issues/4186
+        # and it seems normal: https://github.com/requests/requests/issues/4186
         pprint(res.json())
     except ValueError as ve:
         logging.warning("Response Exception: {}".format(ve))
@@ -279,7 +279,7 @@ def update(api=None, **kwargs):
     res = api.put(
         path=path,
         payload=kwargs['data']
-    )
+    ).json()
     return res
 
 
