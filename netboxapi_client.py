@@ -301,9 +301,6 @@ def get_configuration(path='netboxapi.json'):
 
 
 def main():
-    #TODO: ensure this is not necessary anymore on Ubuntu > 16.04
-    requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
-
     parser = argparse.ArgumentParser()
 
     ## NOT IMPLEMENTED YET
