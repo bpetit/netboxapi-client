@@ -12,4 +12,4 @@ Copy `netboxapi.json.example` file to `netboxapi.json` and edit that file to mat
 ## TODO
 
 - prevent sending multiple requests/discovering the model if not required
-- fix delete method output
+- better catch exceptions to give users a more comprehensive output
