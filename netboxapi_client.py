@@ -188,7 +188,7 @@ def get(api, model, obj, ident=None, name=None):
             )
         ).json()
 
-def enum(api, model, obj, **kwargs):
+def enum(api, model, obj):
     """enum
 
     Displays and returns all instances of an object, as json data.
@@ -199,7 +199,7 @@ def enum(api, model, obj, **kwargs):
     pprint(res)
     return res
 
-def get_list(api, model, obj, **kwargs):
+def get_list(api, model, obj):
     """enum
 
     Returns all instances of an object, as json data.
