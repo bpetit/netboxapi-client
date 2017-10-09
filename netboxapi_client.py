@@ -158,7 +158,7 @@ class Api(object):
             logging.warning("Certificate verify failed.")
 
 
-def show(api=None, ident=None, name=None, model=None, obj=None, **kwargs):
+def show(api, model, obj, ident=None, name=None):
     """show
 
     Calls api object and its get function (and optionally get_id_by_name).
@@ -172,7 +172,7 @@ def show(api=None, ident=None, name=None, model=None, obj=None, **kwargs):
     pprint(res)
     return res
 
-def get(api=None, ident=None, name=None, model=None, obj=None, **kwargs):
+def get(api, model, obj, ident=None, name=None):
     """show
 
     Calls api object and its get function (and optionally get_id_by_name).
@@ -188,7 +188,7 @@ def get(api=None, ident=None, name=None, model=None, obj=None, **kwargs):
             )
         ).json()
 
-def enum(api=None, model=None, obj=None, **kwargs):
+def enum(api, model, obj, **kwargs):
     """enum
 
     Displays and returns all instances of an object, as json data.
@@ -199,7 +199,7 @@ def enum(api=None, model=None, obj=None, **kwargs):
     pprint(res)
     return res
 
-def get_list(api=None, model=None, obj=None, **kwargs):
+def get_list(api, model, obj, **kwargs):
     """enum
 
     Returns all instances of an object, as json data.
@@ -207,11 +207,11 @@ def get_list(api=None, model=None, obj=None, **kwargs):
     :param **kwargs:
     """
     if model and obj:
-        res = api.get("{}/{}/".format(model, obj)).json()
+        res  = api.get("{}/{}/".format(model, obj)).json()
         return res
 
 
-def create(api=None, model=None, obj=None, data=None, **kwargs):
+def create(api, model, obj, data):
     """create
 
     Calls api object post function in order to create a new object.
@@ -230,7 +230,7 @@ def create(api=None, model=None, obj=None, data=None, **kwargs):
 
 
 
-def delete(api=None, ident=None, name=None, model=None, obj=None, **kwargs):
+def delete(api, model, obj, ident=None, name=None):
     """delete
 
     Calls api object delete function in order to delete an object.
@@ -255,10 +255,7 @@ def delete(api=None, ident=None, name=None, model=None, obj=None, **kwargs):
     return result
 
 
-def update(
-    api=None, ident=None, name=None, model=None,
-    obj=None, data=None, **kwargs
-):
+def update(api, model, obj, data, ident=None, name=None):
     """update
 
     Calls api object put function in order to edit some elements of an object.
