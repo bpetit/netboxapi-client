@@ -83,11 +83,18 @@ class BasicTest(unittest.TestCase):
             self.__api, model="dcim", obj="sites",
             data={ 'name': 'ohvi7Xiew6VohSee1ael', 'slug': 'ohvi7Xiew6VohSee1ael' }
         )
+        self.assertTrue(type(res) is dict)
         self.__last_id = res['id']
+        res = get(
+            self.__api, model='dcim', obj='sites',
+            ident=self.__last_id
+        )
+        self.assertTrue(type(res) is dict)
         res = delete(
             self.__api, model="dcim", obj="sites",
             name='ohvi7Xiew6VohSee1ael'
         )
+        self.assertTrue(type(res) is dict)
 
     def test_delete_object_by_name(self):
         res = delete(
