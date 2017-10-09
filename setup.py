@@ -26,6 +26,7 @@ setup(
 
     # The project's main homepage.
     url='https://github.com/bpetit/netboxapi-client',
+    download_url='https://github.com/bpetit/netboxapi-client/archive/v0.1-alpha1.tar.gz',
 
     # Author details
     author='Benoit Petit',
