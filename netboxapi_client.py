@@ -211,7 +211,7 @@ def get_list(api=None, model=None, obj=None, **kwargs):
         return res
 
 
-def create(api=None, **kwargs):
+def create(api=None, model=None, obj=None, data=None, **kwargs):
     """create
 
     Calls api object post function in order to create a new object.
@@ -221,16 +221,16 @@ def create(api=None, **kwargs):
     :param **kwargs:
     """
     res = None
-    if 'model' and 'obj' and 'data' in kwargs:
+    if model and obj and data:
         res = api.post(
-            path="{}/{}/".format(kwargs['model'], kwargs['obj']),
-            payload=kwargs['data']
+            path="{}/{}/".format(model, obj),
+            payload=data
         ).json()
     return res
 
 
 
-def delete(api=None, **kwargs):
+def delete(api=None, ident=None, name=None, model=None, obj=None, **kwargs):
     """delete
 
     Calls api object delete function in order to delete an object.
@@ -238,15 +238,12 @@ def delete(api=None, **kwargs):
 
     :param **kwargs:
     """
-    pprint(kwargs)
-    if (not 'ident' in kwargs or kwargs['ident'] is None) and 'name' in kwargs:
+    if (ident is None) and name is not None:
         ident = api.get_id_by_name("{}/{}".format(
-            kwargs['model'], kwargs['obj']), kwargs['name']
+            model, obj), name
         )
-    else:
-        ident=kwargs['ident']
     res = api.delete(
-        path="{}/{}/{}".format(kwargs['model'], kwargs['obj'], ident)
+        path="{}/{}/{}".format(model, obj, ident)
     )
     # Response.json() raises an exception when there is no data,
     # and it seems normal: https://github.com/requests/requests/issues/4186
