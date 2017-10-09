@@ -7,7 +7,6 @@ import json
 import sys
 import os
 from pprint import pprint
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 
 class Api(object):
@@ -249,14 +248,14 @@ def delete(api=None, **kwargs):
     res = api.delete(
         path="{}/{}/{}".format(kwargs['model'], kwargs['obj'], ident)
     )
-    return res
+    # Response.json() raises an exception when there is no data,
+    # and it seems normal: https://github.com/requests/requests/issues/4186
+    result = None
     try:
-        # Response.json() raises an exception when there is no data,
-        # and it seems normal: https://github.com/requests/requests/issues/4186
-        pprint(res.json())
-    except ValueError as ve:
-        logging.warning("Response Exception: {}".format(ve))
-        pprint(res)
+        result = res.json()
+    except ValueError:
+        result = {}
+    return result
 
 
 def update(api=None, **kwargs):

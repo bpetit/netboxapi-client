@@ -58,7 +58,7 @@ class BasicTest(unittest.TestCase):
 
     def test_delete_absent_object(self):
         res = delete(self.__api, model="dcim", obj="sites", ident=1)
-        self.assertTrue(type(res.json()) is dict)
+        self.assertTrue(type(res) is dict)
 
     def test_create_object(self):
         """
@@ -94,9 +94,9 @@ class BasicTest(unittest.TestCase):
             self.__api, model="dcim", obj="sites",
             name='testsite9'
         )
-        print('delete')
-        pprint(res)
-        print('delete')
+        # delete function should return a dict
+        self.assertFalse(res is None)
+        self.assertTrue(type(res) is dict)
 
 if __name__ == '__main__':
     unittest.main()
