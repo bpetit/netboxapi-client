@@ -211,7 +211,7 @@ def get_list(api, model, obj, **kwargs):
         return res
 
 
-def create(api, model, obj, data):
+def create(api, model, obj, data, ident=None, name=None):
     """create
 
     Calls api object post function in order to create a new object.
@@ -255,7 +255,7 @@ def delete(api, model, obj, ident=None, name=None):
     return result
 
 
-def update(api, model, obj, data, ident=None, name=None):
+def update(api, model, obj, data, ident=None, name=None, **kwargs):
     """update
 
     Calls api object put function in order to edit some elements of an object.
@@ -371,7 +371,6 @@ def main():
                         dest=arg['dest'],
                     )
     ns = parser.parse_args()
-    pprint(ns)
     if 'action' in ns:
         if 'data' in ns and ns.data:
                 pprint(
@@ -382,7 +381,7 @@ def main():
                         ident=ns.id,
                         name=ns.name,
                         data=json.loads(ns.data)
-                    ).json()
+                    )
                 )
         else:
             FUNCTION_MAP[ns.action](
