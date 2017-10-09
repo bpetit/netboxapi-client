@@ -255,7 +255,10 @@ def delete(api=None, ident=None, name=None, model=None, obj=None, **kwargs):
     return result
 
 
-def update(api=None, **kwargs):
+def update(
+    api=None, ident=None, name=None, model=None,
+    obj=None, data=None, **kwargs
+):
     """update
 
     Calls api object put function in order to edit some elements of an object.
@@ -263,18 +266,14 @@ def update(api=None, **kwargs):
 
     :param **kwargs:
     """
-    if 'ident' in kwargs:
-        ident = kwargs['ident']
-    else:
-        ident = None
-    if (not 'ident' in kwargs or kwargs['ident'] is None) and 'name' in kwargs:
+    if ident is None and name is not None:
         ident = api.get_id_by_name("{}/{}".format(
-            kwargs['model'], kwargs['obj']), kwargs['name']
+            model, obj), name
         )
-    path = "{}/{}/{}".format(kwargs['model'], kwargs['obj'], ident)
+    path = "{}/{}/{}".format(model, obj, ident)
     res = api.put(
         path=path,
-        payload=kwargs['data']
+        payload=data
     ).json()
     return res
 
