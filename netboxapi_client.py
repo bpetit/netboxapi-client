@@ -87,8 +87,12 @@ class Api(object):
         self.get(path, "?limit=0")
         elements = self.__last_reply.json()
         for e in elements['results']:
-            if e['name'] == name:
-                return e['id']
+            if 'name' in e:
+                if e['name'] == name:
+                    return e['id']
+            else:
+                if e['model'] == name:
+                    return e['id']
         return None
 
     def list(self, path=""):
@@ -211,7 +215,6 @@ def get_list(api, model, obj, **kwargs):
         return res
 
 def get_list_grouped_by_tenant(api, model, obj, **kwargs):
-
     res = get_list(api, model, obj)
     by_tenants = {}
     for dev in res['results']:
@@ -227,14 +230,6 @@ def get_list_grouped_by_tenant(api, model, obj, **kwargs):
     return by_tenants
 
 def create(api, model, obj, data, ident=None, name=None):
-    """create
-
-    Calls api object post function in order to create a new object.
-    Returns response as json data.
-    TODO: raise an exception if parameters are not good.
-
-    :param **kwargs:
-    """
     res = None
     if model and obj and data:
         res = api.post(
