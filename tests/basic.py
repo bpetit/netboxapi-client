@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import unittest
-from netboxapi_client import Api, get_list, create, delete, get
+from netboxapi_client import Api, get_list, create, delete, get, get_list_grouped_by_tenant
 
 TOKEN = "2b2b00559b133a499c027e6a60efd7b0e87a6876"
 URL = "http://localhost:8000"
@@ -46,7 +46,6 @@ class BasicTest(unittest.TestCase):
         """
         res = get_list(self.__api, model="dcim", obj="devices")
         self.assertTrue(type(res['results']) is list)
-        self.assertEqual(len(res['results']), 0)
 
     def test_get_list_objects(self):
         """
@@ -103,6 +102,54 @@ class BasicTest(unittest.TestCase):
         # delete function should return a dict
         self.assertFalse(res is None)
         self.assertTrue(type(res) is dict)
+
+    def test_get_list_by_tenant(self):
+        res = create(
+            self.__api, model="dcim", obj="device-roles",
+            data={ 'name': 'testdev9', 'slug': 'testdev9', 'color': 'ffffff'}
+        )
+        device_role_id = res['id']
+        res = create(
+            self.__api, model="dcim", obj="sites",
+            data={ 'name': 'testdev9', 'slug': 'testdev9'}
+        )
+        site_id = res['id']
+        res = create(
+            self.__api, model="dcim", obj="device-types",
+            data={ 'name': 'testdev9', 'slug': 'testdev9', 'manufacturer': 1,
+                'model': 'testdev9'
+            }
+        )
+        device_type_id = res['id']
+        res = create(
+            self.__api, model="dcim", obj="devices",
+            data={ 'name': 'testdev9', 'slug': 'testdev9', 'device_role': device_role_id, 'site': site_id, 'device_type': device_type_id }
+        )
+        device_id = res['id']
+        res = get_list_grouped_by_tenant(
+            self.__api, model="dcim", obj="devices"
+        )
+        self.assertTrue(type(res) is dict)
+        self.assertTrue('unclassified' in res)
+        self.assertTrue('hosts' in res['unclassified'])
+        self.assertTrue('testdev9' in res['unclassified']['hosts'])
+        res = delete(
+            self.__api, model="dcim", obj="devices",
+            ident=device_id
+        )
+        res = delete(
+            self.__api, model="dcim", obj="device-roles",
+            ident=device_role_id
+        )
+        res = delete(
+            self.__api, model="dcim", obj="device-types",
+            ident=device_type_id
+        )
+        res = delete(
+            self.__api, model="dcim", obj="sites",
+            ident=site_id
+        )
+
 
 if __name__ == '__main__':
     unittest.main()

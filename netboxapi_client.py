@@ -210,6 +210,21 @@ def get_list(api, model, obj, **kwargs):
         res  = api.get("{}/{}/".format(model, obj)).json()
         return res
 
+def get_list_grouped_by_tenant(api, model, obj, **kwargs):
+
+    res = get_list(api, model, obj)
+    by_tenants = {}
+    for dev in res['results']:
+        if 'tenant' in dev and dev['tenant']:
+            if dev['tenant']['name'] not in by_tenants.keys():
+                by_tenants[dev['tenant']['name']] = {}
+                by_tenants[dev['tenant']['name']]['hosts'] = []
+            by_tenants[dev['tenant']['name']]['hosts'].append(dev['name'])
+        else:
+            if 'unclassified' not in by_tenants.keys():
+                by_tenants['unclassified'] = { 'hosts': [] }
+            by_tenants['unclassified']['hosts'].append(dev['name'])
+    return by_tenants
 
 def create(api, model, obj, data, ident=None, name=None):
     """create
