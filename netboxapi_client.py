@@ -168,16 +168,12 @@ def show(api, model, obj, ident=None, name=None):
     Calls api object and its get function (and optionally get_id_by_name).
     Displays and returns response as json data.
     """
-    res = api.get(
-            "{}/{}/{}".format(
-                model, obj, ident
-            )
-        ).json()
+    res = get(api, model, obj, ident, name)
     pprint(res)
     return res
 
 def get(api, model, obj, ident=None, name=None):
-    """show
+    """show 
 
     Calls api object and its get function (and optionally get_id_by_name).
     Returns response as json data.
