@@ -314,7 +314,6 @@ def main():
     #)
 
     config = get_configuration()
-    pprint(config)
     api = Api(
         url=config['url'],
         token=config['token']
