@@ -11,7 +11,7 @@ Under development
 
 You can clone that repo and install locally with:
 
-		python setup.py build && pip install -e .
+	python setup.py build && pip install -e .
 
 Proper pypi package on it's way.
 
@@ -27,17 +27,17 @@ Copy `netboxapi.json.example` file to `netboxapi.json` and edit that file to mat
 
 This is a very basic example:
 
-		from pprint import pprint
-		from netboxapi_client import Api, get
+	from pprint import pprint
+	from netboxapi_client import Api, get
 
-		TOKEN = "thetokenyoucangetfromnetboxwebuionauserprofilepage"
-		URL = "https://netbox.example.org"
+	TOKEN = "thetokenyoucangetfromnetboxwebuionauserprofilepage"
+	URL = "https://netbox.example.org"
 
-		api = Api(url=URL, token=TOKEN)
+	api = Api(url=URL, token=TOKEN)
 
-		res = get(api, model="dcim", obj="devices", name="sw-02-par-eq2")
+	res = get(api, model="dcim", obj="devices", name="sw-02-par-eq2")
 
-		pprint(res)
+	pprint(res)
 
 For now, you have to import the Api class and the function you need (get, get_list, update, create, delete, and so on...). This will be improved soon...
 
