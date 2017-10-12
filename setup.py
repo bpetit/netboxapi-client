@@ -19,7 +19,7 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='v0.1-alpha1',
+    version='0.1a1',
 
     description='Python client for netbox API',
     long_description=long_description,
@@ -57,7 +57,7 @@ setup(
     ],
 
     # What does your project relate to?
-    keywords='infrastructure documentation',
+    keywords='infrastructure documentation api',
 
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
@@ -73,7 +73,7 @@ setup(
     # https://packaging.python.org/en/latest/requirements.html
     install_requires=[],
 
-    #python_requires='>=2.7',
+    python_requires='~=2.7',
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
