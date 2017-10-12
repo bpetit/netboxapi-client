@@ -25,20 +25,20 @@ Copy `netboxapi.json.example` file to `netboxapi.json` and edit that file to mat
 
 Here are some examples:
 
-	netboxapi_client -h																							# list all available categories
-	netboxapi_client dcim -h																				# list all available object types in the dcim category
-	netboxapi_client dcim devices -h																# list all available options for an object
-	netboxapi_client dcim devices list															# list all device objects
+	netboxapi_client -h						# list all available categories
+	netboxapi_client dcim -h					# list all available object types in the dcim category
+	netboxapi_client dcim devices -h				# list all available options for an object
+	netboxapi_client dcim devices list				# list all device objects
 	netboxapi_client dcim devices create -d '$(cat mydevice.json)' 	# create a device object with data from a json file
-	netboxapi_client dcim devices create \ 													# create a device object with object data from cli
+	netboxapi_client dcim devices create \ 				# create a device object with object data from cli
 		-d '{ "name": "sw-02-par-eq2", \
-					"slug": "sw-02-par-eq2", \
-					"device_role": "1", \
-					"device_type": "8", \
-					"site": "184" }'
-	netboxapi_client dcim devices show -n sw-02-par-eq2							# show device by name
-	netboxapi_client dcim devices show -i 10												# show device by numerical identifier
-	netboxapi_client dcim devices delete -n sw-02-par-eq2						# delete device by name
+		      "slug": "sw-02-par-eq2", \
+		      "device_role": "1", \
+		      "device_type": "8", \
+		      "site": "184" }'
+	netboxapi_client dcim devices show -n sw-02-par-eq2		# show device by name
+	netboxapi_client dcim devices show -i 10			# show device by numerical identifier
+	netboxapi_client dcim devices delete -n sw-02-par-eq2		# delete device by name
 
 ### From code
 
