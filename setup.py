@@ -10,7 +10,7 @@ from os import path
 here = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
-with open(path.join(here, 'README.md'), encoding='utf-8') as f:
+with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
@@ -44,7 +44,7 @@ setup(
         'Development Status :: 3 - Alpha',
 
         # Indicate who your project is intended for
-        'Intended Audience :: Developers & System administrators',
+        'Intended Audience :: System Administrators',
         'Topic :: Software Development :: Build Tools',
 
         # Pick your license as you wish (should match "license" above)
@@ -52,7 +52,7 @@ setup(
 
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
-        'Programming La nguage :: Python :: 2.7',
+        'Programming Language :: Python :: 2.7',
 #        'Programming Language :: Python :: 3.5',
     ],
 
