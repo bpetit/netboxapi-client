@@ -17,7 +17,7 @@ Installation
 
 You can clone that repo and install locally with:
 
-.. code-block:: python
+.. code-block:: bash
 
 	python setup.py build && pip install -e .
 
