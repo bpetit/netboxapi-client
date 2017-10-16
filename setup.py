@@ -19,14 +19,14 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.1a1',
+    version='0.1a2',
 
     description='Python client for netbox API',
     long_description=long_description,
 
     # The project's main homepage.
     url='https://github.com/bpetit/netboxapi-client',
-    download_url='https://github.com/bpetit/netboxapi-client/archive/v0.1-alpha1.tar.gz',
+    download_url='https://github.com/bpetit/netboxapi-client/archive/0.1-a2.tar.gz',
 
     # Author details
     author='Benoit Petit',
