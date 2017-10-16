@@ -17,6 +17,8 @@ Installation
 
 You can clone that repo and install locally with:
 
+.. code-block:: python
+
 	python setup.py build && pip install -e .
 
 Proper pypi package on it's way.
@@ -34,25 +36,29 @@ Copy `netboxapi.json.example` file to `netboxapi.json` and edit that file to mat
 
 Here are some examples:
 
-	netboxapi_client -h						# list all available categories
-	netboxapi_client dcim -h					# list all available object types in the dcim category
-	netboxapi_client dcim devices -h				# list all available options for an object
-	netboxapi_client dcim devices list				# list all device objects
-	netboxapi_client dcim devices create -d '$(cat mydevice.json)' 	# create a device object with data from a json file
-	netboxapi_client dcim devices create \ 				# create a device object with object data from cli
+.. code-block:: bash
+
+	netboxapi_client -h
+	netboxapi_client dcim -h category
+	netboxapi_client dcim devices -h
+	netboxapi_client dcim devices list
+	netboxapi_client dcim devices create -d '$(cat mydevice.json)'
+	netboxapi_client dcim devices create \
 		-d '{ "name": "sw-02-par-eq2", \
 		      "slug": "sw-02-par-eq2", \
 		      "device_role": "1", \
 		      "device_type": "8", \
 		      "site": "184" }'
-	netboxapi_client dcim devices show -n sw-02-par-eq2		# show device by name
-	netboxapi_client dcim devices show -i 10			# show device by numerical identifier
-	netboxapi_client dcim devices delete -n sw-02-par-eq2		# delete device by name
+	netboxapi_client dcim devices show -n sw-02-par-eq2
+	netboxapi_client dcim devices show -i 10
+	netboxapi_client dcim devices delete -n sw-02-par-eq2
 
 From code
 =========
 
 This is a very basic example:
+
+.. code-block:: python
 
 	from pprint import pprint
 	from netboxapi_client import Api, get
