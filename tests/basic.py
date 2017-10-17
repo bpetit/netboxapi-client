@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
 import unittest
-from netboxapi_client import Api, get_list, create, delete, get, get_list_grouped_by_tenant
+from netboxapi_client import Api, get_list, create, delete, get, get_list_grouped_by_tenant, update
+from pprint import pprint
 
 TOKEN = "2b2b00559b133a499c027e6a60efd7b0e87a6876"
 URL = "http://localhost:8000"
@@ -32,14 +33,6 @@ class BasicTest(unittest.TestCase):
         for model in self.__models:
             res = self.__api.get('{}'.format(model))
             self.assertGreaterEqual(len(res.json()), 1)
-
-    def test_enum_objects(self):
-        """
-        Tests if the client is able to list all objects of a given type.
-        """
-        res = get_list(self.__api, model="ipam", obj="aggregates")
-        self.assertTrue(type(res['results']) is list)
-        self.assertGreaterEqual(len(res['results']), 1)
 
     def test_enum_no_objects(self):
         """
@@ -148,6 +141,73 @@ class BasicTest(unittest.TestCase):
         res = delete(
             self.__api, model="dcim", obj="sites",
             ident=site_id
+        )
+
+    def test_update_object(self):
+        object_name = 'aJaid0pei4waj2m'
+        new_object_name = 'guta9IneeTei9fa'
+        create(
+            self.__api, model="dcim", obj="sites",
+            data={ 'name': object_name, 'slug': object_name }
+        )	
+        res = get(
+            self.__api, model="dcim", obj="sites", name=object_name
+        )
+        self.assertTrue(type(res) is dict)
+        self.assertIn('name', res)
+        self.assertIn('slug', res)
+        self.assertEquals(res['name'], object_name)
+        self.assertEquals(res['slug'], object_name)
+        res = update(
+            self.__api, model="dcim", obj="sites", name=object_name,
+            data={ 'name': object_name, 'slug': new_object_name }	
+        )
+        res = get(
+            self.__api, model="dcim", obj="sites", name=object_name
+        )
+        self.assertTrue(type(res) is dict)
+        self.assertIn('name', res)
+        self.assertIn('slug', res)
+        self.assertEquals(res['name'], object_name)
+        self.assertEquals(res['slug'], new_object_name)
+        delete(
+            self.__api, model="dcim", obj="sites", name=object_name
+        )
+
+    def test_update_object_and_change_name(self):
+        object_name = 'aJaid0pei4waj2m'
+        new_object_name = 'guta9IneeTei9fa'
+        create(
+            self.__api, model="dcim", obj="sites",
+            data={ 'name': object_name, 'slug': object_name }
+        )	
+        res = get(
+            self.__api, model="dcim", obj="sites", name=object_name
+        )
+        self.assertTrue(type(res) is dict)
+        self.assertIn('name', res)
+        self.assertIn('slug', res)
+        self.assertEquals(res['name'], object_name)
+        self.assertEquals(res['slug'], object_name)
+        res = update(
+            self.__api, model="dcim", obj="sites", name=object_name,
+            data={ 'name': new_object_name, 'slug': new_object_name }	
+        )
+        res = get(
+            self.__api, model="dcim", obj="sites", name=object_name
+        )
+        self.assertTrue(type(res) is dict)
+        self.assertNotIn('name', res)
+        self.assertNotIn('slug', res)
+        res = get(
+            self.__api, model="dcim", obj="sites", name=new_object_name
+        )
+        self.assertIn('name', res)
+        self.assertIn('slug', res)
+        self.assertEquals(res['name'], new_object_name)
+        self.assertEquals(res['slug'], new_object_name)
+        delete(
+            self.__api, model="dcim", obj="sites", name=new_object_name
         )
 
 
