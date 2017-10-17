@@ -19,14 +19,14 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.1a2',
+    version='0.1a3',
 
     description='Python client for netbox API',
     long_description=long_description,
 
     # The project's main homepage.
     url='https://github.com/bpetit/netboxapi-client',
-    download_url='https://github.com/bpetit/netboxapi-client/archive/0.1-a2.tar.gz',
+    download_url='https://github.com/bpetit/netboxapi-client/archive/0.1-a3.tar.gz',
 
     # Author details
     author='Benoit Petit',
@@ -52,7 +52,7 @@ setup(
 
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 2.7', 
 #        'Programming Language :: Python :: 3.5',
     ],
 

@@ -1,17 +1,14 @@
-================
 netboxapi-client
 ================
 
 This is a python client for netbox (https://github.com/digitalocean/netbox) API. It can be used either as a python module/library or directly from the command line.
 The goal of this project is to provide a simple way to automate infrastructure documentation based on the REST API from that great project that is Netbox.
 
-------
 Status
 ------
 
 Under development
 
-------------
 Installation
 ------------
 
@@ -23,12 +20,10 @@ You can clone that repo and install locally with:
 
 Proper pypi package on it's way.
 
------
 Usage
 -----
 
-From CLI, using a configuration file
-====================================
+From CLI, using a configuration file:
 
 Copy `netboxapi.json.example` file to `netboxapi.json` and edit that file to match your netbox instance url and token.
 
@@ -53,8 +48,7 @@ Here are some examples:
 	netboxapi_client dcim devices show -i 10
 	netboxapi_client dcim devices delete -n sw-02-par-eq2
 
-From code
-=========
+From code:
 
 This is a very basic example:
 
@@ -74,7 +68,6 @@ This is a very basic example:
 
 For now, you have to import the Api class and the function you need (get, get_list, update, create, delete, and so on...). This will be improved soon...
 
-----
 TODO
 ----
 
