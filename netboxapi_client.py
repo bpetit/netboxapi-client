@@ -267,9 +267,11 @@ def update(api, model, obj, data, ident=None, name=None, **kwargs):
     Calls api object put function in order to edit some elements of an object.
     Object can be selected by id or by name.
 
+    TODO: raise exception if required fields are not provided
+
     :param **kwargs:
     """
-    if ident is None and name is not None:
+    if (ident is None) and name is not None:
         ident = api.get_id_by_name("{}/{}".format(
             model, obj), name
         )
@@ -277,8 +279,12 @@ def update(api, model, obj, data, ident=None, name=None, **kwargs):
     res = api.put(
         path=path,
         payload=data
-    ).json()
-    return res
+    )
+    try:
+        result = res.json()
+    except ValueError:
+        result = {}
+    return result
 
 
 def get_configuration(path='netboxapi.json'):
