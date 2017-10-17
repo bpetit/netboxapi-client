@@ -81,3 +81,4 @@ TODO
 - prevent sending multiple requests/discovering the model if not required
 - better catch exceptions to give users a more comprehensive output
 - setup CI/CD pipeline and build status on github
+- push docker image to public repo and add docker-compose.yml, entrypoint.sh to the repo, add testing process to documentation
