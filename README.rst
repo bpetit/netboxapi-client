@@ -68,6 +68,27 @@ This is a very basic example:
 
 For now, you have to import the Api class and the function you need (get, get_list, update, create, delete, and so on...). This will be improved soon...
 
+How-to test
+-----------
+
+Install docker and docker-compose and then:
+
+.. code-block:: bash
+
+  sudo docker-compose run --rm netbox createsuperuser
+
+You will be prompted for a username, email and password for the superuser.
+
+.. code-block:: bash
+
+  sudo docker-compose up -d
+
+Then you have to connect to the netbox instance you just installed. It should be accessible at http://localhost:8000 . Login with the credentials you choosed earlier. On the top right you can select username > profile. Then click on "API tokens" and create one (either use the one writen in tests/basic.py or choose one and replace the one in this file. (yeah token creation could be automated, it will be...)
+
+.. code-block:: bash
+
+  python tests/basic.py
+
 TODO
 ----
 
