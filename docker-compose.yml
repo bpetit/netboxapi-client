@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+    db:
+        image: postgres:9.5
+        environment:
+            - POSTGRES_USER=netbox
+            - POSTGRES_PASSWORD=netbox
+
+    netbox:
+        image: bpetit/netbox
+        depends_on:
+            - db
+        ports:
+            - "8000:8000"
+        environment:
+            - "ALLOWED_HOSTS=netbox.dev localhost"
+            - "DB_HOST=db"
+            - "DB_NAME=netbox"
+            - "DB_USER=netbox"
+            - "DB_PASS=netbox"
+            - "SECRET_KEY=cei5eya6eiyieh6wuqu6eephaeGhat3iez9aeNuk0ioYuChoo7" # change me
+
