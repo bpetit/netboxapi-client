@@ -83,7 +83,11 @@ You will be prompted for a username, email and password for the superuser.
 
   sudo docker-compose up -d
 
-Then you have to connect to the netbox instance you just installed. It should be accessible at http://localhost:8000 . Login with the credentials you choosed earlier. On the top right you can select username > profile. Then click on "API tokens" and create one (either use the one writen in tests/basic.py or choose one and replace the one in this file. (yeah token creation could be automated, it will be...)
+Then you have to connect to the netbox instance you just installed. It should be accessible at http://localhost:8000 . Login with the credentials you choosed earlier. On the top right you can select username > profile. Then click on "API tokens" and create one, either use the one writen in tests/basic.py or choose one and replace the one in this file. (yeah token creation could be automated, it will be...)
+
+Then you can try querying the api as described earlier.
+
+To run unit tests:
 
 .. code-block:: bash
 
