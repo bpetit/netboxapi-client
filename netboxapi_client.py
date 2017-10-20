@@ -167,16 +167,28 @@ def show(api, model, obj, ident=None, name=None):
 
     Calls api object and its get function (and optionally get_id_by_name).
     Displays and returns response as json data.
+
+    :param api: Api object
+    :param model: string, tells which data model to use
+    :param obj: string, tells which object to use
+    :param ident: int, numerical identifier of the object
+    :param name: string, name of the object
     """
     res = get(api, model, obj, ident, name)
     pprint(res)
     return res
 
 def get(api, model, obj, ident=None, name=None):
-    """show 
+    """get 
 
     Calls api object and its get function (and optionally get_id_by_name).
     Returns response as json data.
+
+    :param api: Api object
+    :param model: string, tells which data model to use
+    :param obj: string, tells which object to use
+    :param ident: int, numerical identifier of the object
+    :param name: string, name of the object
     """
     if ident is None and name is not None:
         ident = api.get_id_by_name(
@@ -193,6 +205,9 @@ def enum(api, model, obj, **kwargs):
 
     Displays and returns all instances of an object, as json data.
 
+    :param api: Api object
+    :param model: string, tells which data model to use
+    :param obj: string tells which object to use
     :param **kwargs:
     """
     res = get_list(api, model, obj)
@@ -200,10 +215,13 @@ def enum(api, model, obj, **kwargs):
     return res
 
 def get_list(api, model, obj, **kwargs):
-    """enum
+    """get_list
 
     Returns all instances of an object, as json data.
 
+    :param api: Api object
+    :param model: string, tells which data model to use
+    :param obj: string tells which object to use
     :param **kwargs:
     """
     if model and obj:
@@ -211,6 +229,13 @@ def get_list(api, model, obj, **kwargs):
         return res
 
 def get_list_grouped_by_tenant(api, model, obj, **kwargs):
+    """get_list_grouped_by_tenant
+
+    :param api: Api object
+    :param model: string, tells which data model to use
+    :param obj: string tells which object to use
+    :param **kwargs:
+    """
     res = get_list(api, model, obj)
     by_tenants = {}
     for dev in res['results']:
@@ -226,6 +251,17 @@ def get_list_grouped_by_tenant(api, model, obj, **kwargs):
     return by_tenants
 
 def create(api, model, obj, data, ident=None, name=None):
+    """create
+
+	Creates an object.
+
+    :param api: Api object
+    :param model: string, tells which data model to use
+    :param obj: string tells which object to use
+    :param data: dict, containing data for the object we create
+    :param ident: int, numerical identifier of the object
+    :param name: string, name of the object
+    """
     res = None
     if model and obj and data:
         res = api.post(
@@ -242,7 +278,11 @@ def delete(api, model, obj, ident=None, name=None):
     Calls api object delete function in order to delete an object.
     The selection is based on id or name of the object.
 
-    :param **kwargs:
+    :param api: Api object
+    :param model: string, tells which data model to use
+    :param obj: string tells which object to use
+    :param ident: int, numerical identifier of the object
+    :param name: string, name of the object
     """
     if (ident is None) and name is not None:
         ident = api.get_id_by_name("{}/{}".format(
@@ -257,7 +297,7 @@ def delete(api, model, obj, ident=None, name=None):
     try:
         result = res.json()
     except ValueError:
-        result = {}
+        result = res.text
     return result
 
 
@@ -269,6 +309,12 @@ def update(api, model, obj, data, ident=None, name=None, **kwargs):
 
     TODO: raise exception if required fields are not provided
 
+    :param api: Api object
+    :param model: string, tells which data model to use
+    :param obj: string tells which object to use
+    :param data: dict, containing data for the object we update
+    :param ident: int, numerical identifier of the object
+    :param name: string, name of the object
     :param **kwargs:
     """
     if (ident is None) and name is not None:
@@ -283,7 +329,7 @@ def update(api, model, obj, data, ident=None, name=None, **kwargs):
     try:
         result = res.json()
     except ValueError:
-        result = {}
+        result = res.text
     return result
 
 

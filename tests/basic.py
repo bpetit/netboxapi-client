@@ -85,7 +85,7 @@ class BasicTest(unittest.TestCase):
             self.__api, model="dcim", obj="sites",
             name='ohvi7Xiew6VohSee1ael'
         )
-        self.assertTrue(type(res) is dict)
+        self.assertTrue(type(res) is dict or type(res) is unicode and len(res) == 0)
 
     def test_delete_object_by_name(self):
         res = delete(
@@ -94,7 +94,7 @@ class BasicTest(unittest.TestCase):
         )
         # delete function should return a dict
         self.assertFalse(res is None)
-        self.assertTrue(type(res) is dict)
+        self.assertTrue(type(res) is dict or type(res) is unicode and len(res) == 0)
 
     def test_get_list_by_tenant(self):
         res = create(
