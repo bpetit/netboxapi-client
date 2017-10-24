@@ -413,6 +413,15 @@ def main():
         'patch': patch
     }
 
+    DESCRIPTION_MAP = {
+        'show': "Shows an object's data.",
+        'list': "Lists objects.",
+        'create': "Creates object.",
+        'delete': "Deletes object",
+        'update': "Updates object. It is required to fill all fields you want to be filled for that object.",
+        'patch': "Updates one or some fields of an object. Unlike update method, you can specify only the fiels you want to update."
+    }
+
     ARGUMENTS = {
         'identifier': {
             'option': '-i',
@@ -448,7 +457,7 @@ def main():
             action_subparser = elmt_parser.add_subparsers(dest="action")
             for k, v in FUNCTION_MAP.items():
                 action_parser = action_subparser.add_parser(
-                    k, help="{}".format(k)
+                    k, help="{}".format(DESCRIPTION_MAP[k])
                 )
                 for k, arg in ARGUMENTS.items():
                     action_parser.add_argument(
