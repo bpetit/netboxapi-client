@@ -7,7 +7,9 @@ The goal of this project is to provide a simple way to automate infrastructure d
 Status
 ------
 
-Under development
+Under development.
+
+Current developments are tested on netbox v2.2.2 and above.
 
 Installation
 ------------
