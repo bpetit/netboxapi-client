@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import unittest
-from netboxapi_client import Api, get_list, create, delete, get, get_list_grouped_by_tenant, update
+from netboxapi_client import Api, get_list, create, delete, get, get_list_grouped_by_tenant, update, update_field
 from pprint import pprint
 
 TOKEN = "2b2b00559b133a499c027e6a60efd7b0e87a6876"
@@ -208,6 +208,35 @@ class BasicTest(unittest.TestCase):
         self.assertEquals(res['slug'], new_object_name)
         delete(
             self.__api, model="dcim", obj="sites", name=new_object_name
+        )
+
+    def test_update_object_field(self):
+        object_name = 'aJaid0pei4waj2m'
+        new_object_name = 'guta9IneeTei9fa'
+        create(
+            self.__api, model="dcim", obj="sites",
+            data={ 'name': object_name, 'slug': object_name }
+        )	
+        res = get(
+            self.__api, model="dcim", obj="sites", name=object_name
+        )
+        self.assertTrue(type(res) is dict)
+        self.assertIn('name', res)
+        self.assertIn('slug', res)
+        self.assertEquals(res['name'], object_name)
+        self.assertEquals(res['slug'], object_name)
+        res = update_field(
+            self.__api, model="dcim", obj="sites", name=object_name, data={"slug": new_object_name}	
+        )
+        res = get(
+            self.__api, model="dcim", obj="sites", name=object_name
+        )
+        self.assertTrue(type(res) is dict)
+        self.assertIn('name', res)
+        self.assertIn('slug', res)
+        self.assertEquals(res['slug'], new_object_name)
+        delete(
+            self.__api, model="dcim", obj="sites", name=object_name
         )
 
 

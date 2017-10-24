@@ -161,6 +161,21 @@ class Api(object):
         except requests.exceptions.SSLError:
             logging.warning("Certificate verify failed.")
 
+    def patch(self, path="", payload={}):
+        """patch
+
+        :param path:
+        :param payload:
+        """
+        try:
+            self.__last_reply = requests.patch(
+				"{0}/api/{1}/".format(self.__url, path),
+				headers=self.__headers, data=json.dumps(payload),
+				verify=False
+			)
+            return self.__last_reply
+        except requests.exceptions.SSLError:
+            logging.warning("Certificate verify failed.")
 
 def show(api, model, obj, ident=None, name=None):
     """show
@@ -270,8 +285,6 @@ def create(api, model, obj, data, ident=None, name=None):
         ).json()
     return res
 
-
-
 def delete(api, model, obj, ident=None, name=None):
     """delete
 
@@ -332,6 +345,22 @@ def update(api, model, obj, data, ident=None, name=None, **kwargs):
         result = res.text
     return result
 
+def update_field(api, model, obj, data, ident=None, name=None, **kwargs):
+    if (ident is None) and name is not None:
+        ident = api.get_id_by_name("{}/{}".format(
+            model, obj), name
+        )
+    path = "{}/{}/{}".format(model, obj, ident)
+    res = api.patch(
+        path=path,
+        payload=data
+    )
+    try:
+        result = res.json()
+    except ValueError:
+        result = res.text
+    return result
+	
 
 def get_configuration(path='netboxapi.json'):
     """get_configuration
