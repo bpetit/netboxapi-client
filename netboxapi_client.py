@@ -345,7 +345,7 @@ def update(api, model, obj, data, ident=None, name=None, **kwargs):
         result = res.text
     return result
 
-def update_field(api, model, obj, data, ident=None, name=None, **kwargs):
+def patch(api, model, obj, data, ident=None, name=None, **kwargs):
     if (ident is None) and name is not None:
         ident = api.get_id_by_name("{}/{}".format(
             model, obj), name
@@ -410,6 +410,7 @@ def main():
         'create': create,
         'delete': delete,
         'update': update,
+        'patch': patch
     }
 
     ARGUMENTS = {
