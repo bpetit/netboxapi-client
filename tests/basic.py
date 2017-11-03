@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import unittest
-from netboxapi_client import Api, get_list, create, delete, get, get_list_grouped_by_tenant, update, patch
+from netboxapi_client.netboxapi_client import Api, get_list, create, delete, get, get_list_grouped_by_tenant, update, patch
 from pprint import pprint
 
 TOKEN = "2b2b00559b133a499c027e6a60efd7b0e87a6876"
