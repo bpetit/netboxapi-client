@@ -14,20 +14,29 @@ Current developments are tested on netbox v2.2.2 and above.
 Installation
 ------------
 
-You can clone that repo and install locally with:
+From pypi:
+
+.. code-block:: bash
+
+  pip install netboxapi-client #until the pre-release flag is removed you may have to force installation asking specifically for a release ie: pip install netboxapi-client==0.1b1
+
+If you want to test the latest develoment version, you can clone that repo and install locally with:
 
 .. code-block:: bash
 
 	python setup.py build && pip install -e .
 
-Proper pypi package on it's way.
-
 Usage
 -----
 
-From CLI, using a configuration file:
+You need a small configuration file to run the client. That file has, for now, to be named **netboxapi.json** and has to be in the current directory. It should be of that form:
 
-Copy `netboxapi.json.example` file to `netboxapi.json` and edit that file to match your netbox instance url and token.
+.. code-block:: json
+
+  {
+    "url": "https://netbox.example.org",
+    "token": "thisisatokenyoucangetfromthewebinterfacesettingspage"
+  }
 
 `python netboxapi_client.py -h` will give you the overview of the models you can act on. `-h` is available at each depth level of the cli.
 
