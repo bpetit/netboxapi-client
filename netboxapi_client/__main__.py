@@ -2,7 +2,7 @@
 
 import argparse
 import json
-import os
+import os, sys
 from netboxapi_client import Api, create, show, enum, delete, update, patch
 
 def get_configuration(path="{}/netboxapi.json".format(os.getcwd())):
@@ -13,13 +13,16 @@ def get_configuration(path="{}/netboxapi.json".format(os.getcwd())):
 
     :param path:
     """
-    print(path)
     try:
         with open(path) as fd:
             return json.load(fd)
-    except OSError as fne:
-        print("No configuration file found at {}.".format(path))
-        pprint(fne)
+    except Exception:
+        print("No configuration file found at {}. Reading environment variables NETBOXAPI_TOKEN and NETBOXAPI_URL.".format(path))
+        if 'NETBOXAPI_TOKEN' in os.environ and 'NETBOXAPI_URL' in os.environ:
+          config = { "url": os.environ.get('NETBOXAPI_URL'), "token": os.environ.get('NETBOXAPI_TOKEN') }
+          return config
+        else:
+          print("Configuration not properly defined.")
         sys.exit(254)
 
 def main():
@@ -83,6 +86,12 @@ def main():
             'type': str,
             'help': "Name of the object.",
             'dest': 'name'
+        },
+        'configuration_file': {
+          'option': '-c',
+          'type': str,
+          'help': "Path to the json configuration file.",
+          'dest': 'config'
         }
     }
 
