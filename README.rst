@@ -38,7 +38,7 @@ You need a small configuration file to run the client. That file has, for now, t
     "token": "thisisatokenyoucangetfromthewebinterfacesettingspage"
   }
 
-`python netboxapi_client.py -h` will give you the overview of the models you can act on. `-h` is available at each depth level of the cli.
+`netboxapi_client.py -h` will give you the overview of the models you can act on. `-h` is available at each depth level of the cli.
 
 Here are some examples:
 
@@ -81,6 +81,8 @@ For now, you have to import the Api class and the function you need (get, get_li
 
 How-to test
 -----------
+
+Clone the git repository.
 
 Install docker and docker-compose and then:
 
