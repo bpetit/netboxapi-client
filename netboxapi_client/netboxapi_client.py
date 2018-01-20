@@ -317,7 +317,7 @@ def delete(api, model, obj, ident=None, name=None):
 def update(api, model, obj, data, ident=None, name=None, **kwargs):
     """update
 
-    Calls api object put function in order to edit some elements of an object.
+    Calls api object put function in order to edit the object.
     Object can be selected by id or by name.
 
     TODO: raise exception if required fields are not provided
@@ -346,6 +346,20 @@ def update(api, model, obj, data, ident=None, name=None, **kwargs):
     return result
 
 def patch(api, model, obj, data, ident=None, name=None, **kwargs):
+    """patch
+
+    Calls api object patch function in order to edit some fields of the object.
+    The difference with update is that this function calls the patch method of
+	the API, allowing to edit fields of the object without overriding all the fields.
+
+    :param api: Api object
+    :param model: string, tells which data model to use
+    :param obj: string, tells which object to use
+    :param data: dict, containing data for the object we update
+    :param ident: int, numerical identifier of the object
+    :param name: string, name of the object
+    :param **kwargs:
+    """
     if (ident is None) and name is not None:
         ident = api.get_id_by_name("{}/{}".format(
             model, obj), name
