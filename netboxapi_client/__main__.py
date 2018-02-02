@@ -42,13 +42,15 @@ def main():
     #)
 
     config = get_configuration()
+
+    # Disable InsecureRequestWarning
+    if 'insecure' in config:
+        if 'True' in config['insecure']:
+            urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
     api = Api(
         url=config['url'],
         token=config['token']
-        if 'insecure' in config:
-            if config['insecure'] is 'True':
-                # Disable InsecureRequestWarning
-                urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
     )
 
     subparsers = parser.add_subparsers(dest='model')
