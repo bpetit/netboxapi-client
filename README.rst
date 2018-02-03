@@ -44,20 +44,20 @@ Here are some examples:
 
 .. code-block:: bash
 
-	netboxapi_client -h
-	netboxapi_client dcim -h category
-	netboxapi_client dcim devices -h
-	netboxapi_client dcim devices list
-	netboxapi_client dcim devices create -d '$(cat mydevice.json)'
-	netboxapi_client dcim devices create \
+	netboxapi-client -h
+	netboxapi-client dcim -h category
+	netboxapi-client dcim devices -h
+	netboxapi-client dcim devices list
+	netboxapi-client dcim devices create -d '$(cat mydevice.json)'
+	netboxapi-client dcim devices create \
 		-d '{ "name": "sw-02-par-eq2", \
 		      "slug": "sw-02-par-eq2", \
 		      "device_role": "1", \
 		      "device_type": "8", \
 		      "site": "184" }'
-	netboxapi_client dcim devices show -n sw-02-par-eq2
-	netboxapi_client dcim devices show -i 10
-	netboxapi_client dcim devices delete -n sw-02-par-eq2
+	netboxapi-client dcim devices show -n sw-02-par-eq2
+	netboxapi-client dcim devices show -i 10
+	netboxapi-client dcim devices delete -n sw-02-par-eq2
 
 From code:
 

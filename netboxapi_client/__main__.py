@@ -4,6 +4,7 @@ import argparse
 import json
 import os, sys
 from netboxapi_client import Api, create, show, enum, delete, update, patch
+import urllib3
 
 def get_configuration(path="{}/netboxapi.json".format(os.getcwd())):
     """get_configuration
@@ -41,6 +42,12 @@ def main():
     #)
 
     config = get_configuration()
+
+    # Disable InsecureRequestWarning
+    if 'insecure' in config:
+        if 'True' in config['insecure']:
+            urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
     api = Api(
         url=config['url'],
         token=config['token']
