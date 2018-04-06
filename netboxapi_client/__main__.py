@@ -3,6 +3,7 @@
 import argparse
 import json
 import os, sys
+import pprint
 from netboxapi_client import Api, create, show, enum, delete, update, patch
 import urllib3
 
@@ -54,6 +55,12 @@ def main():
     )
 
     subparsers = parser.add_subparsers(dest='model')
+
+    # Basic error checks
+    first_call = api.get('')
+    if first_call.status_code != 200:
+        print('{}'.format(first_call.text))
+        sys.exit(2)
 
     mydict = api.get('').json()
 
@@ -125,6 +132,7 @@ def main():
                         help=arg['help'],
                         dest=arg['dest'],
                     )
+
     ns = parser.parse_args()
     if 'action' in ns:
         if 'data' in ns and ns.data:
