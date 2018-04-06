@@ -1,3 +1,4 @@
+# == Files extensions
 *.swp
 *.swo
 *.swn
@@ -5,3 +6,7 @@ netboxapi.json
 *.log
 __pycache__
 *.pyc
+
+# == Dirs
+build/
+netboxapi_client.egg-info/
