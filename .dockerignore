@@ -10,3 +10,9 @@ __pycache__
 # == Dirs
 build/
 netboxapi_client.egg-info/
+
+# == Other files
+docker-compose.yml
+entrypoint.sh
+LICENCE.txt
+README.md

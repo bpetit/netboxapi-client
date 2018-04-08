@@ -6,7 +6,8 @@ import logging
 import json
 import sys
 import os
-from pprint import pprint
+from urlparse import urlparse, parse_qsl
+from urllib import urlencode
 
 
 class Api(object):
@@ -84,15 +85,35 @@ class Api(object):
         :param path: The path to provide after https://{self.__url}/api/
         :param name: The name of the object.
         """
-        self.get(path, "?limit=0")
-        elements = self.__last_reply.json()
-        for e in elements['results']:
-            if 'name' in e:
-                if e['name'] == name:
-                    return e['id']
-            else:
-                if e['model'] == name:
-                    return e['id']
+        # Support pagination
+        page = 0
+        params="format=json"
+        next = True
+        while next:
+            page += 1
+            print('---> Page: {}'.format(page))
+            self.get(path, "?{}".format(params))
+            try:
+                elements = self.__last_reply.json()
+                for e in elements['results']:
+                    if 'name' in e:
+                        if e['name'] == name:
+                            return e['id']
+                    else:
+                        if e['model'] == name:
+                            return e['id']
+
+                # Support pagination
+                if elements['next'] is None:
+                    next = False
+                else:
+                    params = urlparse(elements['next']).query
+
+            except ValueError:
+                print('Malformed JSON on {}/?{}, Skipping ...'.format(path, params))
+                qs = dict(parse_qsl(params))
+                qs['offset'] = unicode(str(int(qs['offset']) + int(qs['limit'])))
+                params = urlencode(qs)
         return None
 
     def list(self, path=""):
@@ -177,6 +198,21 @@ class Api(object):
         except requests.exceptions.SSLError:
             logging.warning("Certificate verify failed.")
 
+
+# == Main CLI
+#
+# === Helpers
+#
+def print_json(obj):
+    print( json.dumps(
+        obj,
+        sort_keys=True,
+        indent=4, separators=(',', ': ')
+    ))
+
+
+# === Commands
+#
 def show(api, model, obj, ident=None, name=None):
     """show
 
@@ -190,11 +226,13 @@ def show(api, model, obj, ident=None, name=None):
     :param name: string, name of the object
     """
     res = get(api, model, obj, ident, name)
-    pprint(res)
+
+    # Display
+    print_json(res)
     return res
 
 def get(api, model, obj, ident=None, name=None):
-    """get 
+    """get
 
     Calls api object and its get function (and optionally get_id_by_name).
     Returns response as json data.
@@ -226,7 +264,7 @@ def enum(api, model, obj, **kwargs):
     :param **kwargs:
     """
     res = get_list(api, model, obj)
-    pprint(res)
+    print_json(res)
     return res
 
 def get_list(api, model, obj, **kwargs):
@@ -374,4 +412,3 @@ def patch(api, model, obj, data, ident=None, name=None, **kwargs):
     except ValueError:
         result = res.text
     return result
-	
