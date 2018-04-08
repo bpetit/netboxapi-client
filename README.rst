@@ -16,7 +16,7 @@ Current developments are tested on netbox v2.2.2 and above.
 Installation
 ------------
 
-### From pypi:
+**From pypi:**
 
 .. code-block:: bash
 
@@ -29,7 +29,7 @@ If you want to test the latest develoment version, you can clone that repo and i
 	python setup.py build && pip install -e .
 
 
-### From Docker:
+**From Docker:**
 
 .. code-block:: bash
 
