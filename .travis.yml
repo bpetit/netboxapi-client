@@ -8,7 +8,7 @@ before_install:
   - python setup.py build && pip install -e .
   - docker-compose --verbose up -d
   - sleep 5
-  - docker exec netboxapiclient_db_1 su -c "psql netbox < dump.sql" postgres
+  - docker exec netboxapiclient_db_1 su -c "psql netbox < /var/lib/postgresql/dump.sql" postgres
   - docker ps
   - docker logs netboxapiclient_db_1
   - ss -lnpt
