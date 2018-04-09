@@ -8,6 +8,7 @@ before_install:
   - python setup.py build && pip install -e .
   - docker-compose --verbose up -d
   - sleep 5
+  - docker exec netboxapiclient_db_1 psql netbox < dump.sql
   - docker ps
   - docker logs netboxapiclient_db_1
   - ss -lnpt
