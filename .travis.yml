@@ -7,7 +7,8 @@ services:
 before_install:
   - python setup.py build && pip install -e .
   - docker-compose up -d
-  - sleep 10
+  - sleep 5
+  - ls -la db/
   - docker ps
   - ss -lnpt
 
