@@ -5,7 +5,7 @@ services:
   - docker
 
 before_install:
-  - python setup.py build && sudo pip install -e .
+  - python setup.py build && pip install -e .
   - docker-compose up -d
 
 script:
