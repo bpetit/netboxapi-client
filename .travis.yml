@@ -9,4 +9,4 @@ before_install:
   - docker-compose up -d
 
 script:
-  - python test/basic.py
+  - python tests/basic.py
