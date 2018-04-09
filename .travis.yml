@@ -7,13 +7,12 @@ services:
 before_install:
   - python setup.py build && pip install -e .
   - docker-compose up -d
-  - sleep 5
-  - sleep 5
   - docker ps
   - docker logs netboxapiclient_netbox_1
   - docker start netboxapiclient_netbox_1
   - docker logs netboxapiclient_netbox_1
   - docker exec netboxapiclient_db_1 su -c "psql netbox < /var/lib/postgresql/dump.sql" postgres
+  - sleep 5
   - ss -lnpt
 
 script:
