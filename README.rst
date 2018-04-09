@@ -1,3 +1,6 @@
+.. image:: https://travis-ci.org/bpetit/netboxapi-client.svg?branch=master
+
+
 netboxapi-client
 ================
 
