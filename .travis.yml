@@ -15,4 +15,5 @@ before_install:
 
 script:
   - python tests/basic.py
+  - docker build -t netboxapi_client .
   - docker run --rm -it --net=host -e NETBOXAPI_TOKEN=8054b0446b7a2c930230058afb126df65e2f64af -e NETBOXAPI_URL=http://localhost:8000 netboxapi_client:latest ipam aggregates list
