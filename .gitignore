@@ -10,3 +10,4 @@ __pycache__
 # == Dirs
 build/
 netboxapi_client.egg-info/
+db/

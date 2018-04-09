@@ -3,6 +3,8 @@ version: '2'
 services:
     db:
         image: postgres:9.5
+        volumes:
+          - ./db:/var/lib/postgresql/data
         environment:
             - POSTGRES_USER=netbox
             - POSTGRES_PASSWORD=netbox
@@ -21,3 +23,5 @@ services:
             - "DB_PASS=netbox"
             - "SECRET_KEY=cei5eya6eiyieh6wuqu6eephaeGhat3iez9aeNuk0ioYuChoo7" # change me
 
+volumes:
+  db:

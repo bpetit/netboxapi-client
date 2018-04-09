@@ -4,7 +4,7 @@ import unittest
 from netboxapi_client.netboxapi_client import Api, get_list, create, delete, get, get_list_grouped_by_tenant, update, patch
 from pprint import pprint
 
-TOKEN = "2b2b00559b133a499c027e6a60efd7b0e87a6876"
+TOKEN = "8054b0446b7a2c930230058afb126df65e2f64af"
 URL = "http://localhost:8000"
 
 class BasicTest(unittest.TestCase):

@@ -1,0 +1,12 @@
+language: python
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - python setup.py build && sudo pip install -e .
+  - docker-compose up -d
+
+script:
+  - python test/basic.py
