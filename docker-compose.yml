@@ -22,6 +22,3 @@ services:
             - "DB_USER=netbox"
             - "DB_PASS=netbox"
             - "SECRET_KEY=cei5eya6eiyieh6wuqu6eephaeGhat3iez9aeNuk0ioYuChoo7" # change me
-
-volumes:
-  db:
