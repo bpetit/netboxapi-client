@@ -8,6 +8,8 @@ before_install:
   - python setup.py build && pip install -e .
   - docker-compose up -d
   - sleep 10
+  - docker ps
+  - ss -lnpt
 
 script:
   - python tests/basic.py
