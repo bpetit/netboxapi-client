@@ -9,6 +9,7 @@ before_install:
   - docker-compose --verbose up -d
   - sleep 5
   - docker ps
+  - docker logs netboxapiclient_db_1
   - ss -lnpt
 
 script:
