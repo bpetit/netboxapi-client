@@ -10,7 +10,7 @@ before_install:
   - sleep 5
   - docker exec netboxapiclient_db_1 su -c "psql netbox < /var/lib/postgresql/dump.sql" postgres
   - sleep 5
-  - docker kill netboxapiclient_netbox_1
+  - docker ps
   - docker start netboxapiclient_netbox_1
   - docker logs netboxapiclient_db_1
   - ss -lnpt
