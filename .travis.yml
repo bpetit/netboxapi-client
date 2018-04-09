@@ -14,7 +14,7 @@ before_install:
   - ss -lnpt
   - docker ps
   - docker-compose up -d
-  - sleep 5
+  - sleep 10
 
 script:
   - python tests/basic.py
