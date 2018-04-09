@@ -91,7 +91,6 @@ class Api(object):
         next = True
         while next:
             page += 1
-            print('---> Page: {}'.format(page))
             self.get(path, "?{}".format(params))
             try:
                 elements = self.__last_reply.json()
