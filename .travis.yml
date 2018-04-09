@@ -7,14 +7,12 @@ services:
 before_install:
   - python setup.py build && pip install -e .
   - docker-compose up -d
-  - docker logs netboxapiclient_netbox_1
   - sleep 5
   - docker exec netboxapiclient_db_1 su -c "psql netbox < /var/lib/postgresql/dump.sql" postgres
-  - sleep 10
-  - ss -lnpt
-  - docker ps
+  - sleep 2
   - docker-compose up -d
   - sleep 10
 
 script:
   - python tests/basic.py
+  - docker run --rm -it --net=host -e NETBOXAPI_TOKEN=8054b0446b7a2c930230058afb126df65e2f64af -e NETBOXAPI_URL=http://localhost:8000 netboxapi_client:latest ipam aggregates list
