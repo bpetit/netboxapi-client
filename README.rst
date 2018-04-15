@@ -130,4 +130,4 @@ TODO
 - prevent sending multiple requests/discovering the model if not required
 - better catch exceptions to give users a more comprehensive output
 - setup pip package build test in CI
-- setup coverage tests
+- setup coverage tests (coveralls ? codecov ?)
