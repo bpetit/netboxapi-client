@@ -1,7 +1,7 @@
 language: python
 sudo: required
 notifications:
-  webhooks: "https://$USERNAME:$PASSWORD@chat.nc42.fr/hooks/LYg8ktAB2khL7ZCqw/C7KbcqBE5p7mTw2du6PugGex8fjwRvEoXQz8heuWnv44xPa4"
+  webhooks: "https://$USERNAME:$PASSWORD@chat.nc42.fr/hooks/9kFCPnXSs6WuYDfaX/CH4BGz5o4fpuSRnd59yWWgEGwpvxkhZqnk6zKFuQ5P6yQDrB"
 
 services:
   - docker
