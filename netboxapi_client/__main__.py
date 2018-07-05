@@ -3,10 +3,11 @@
 import argparse
 import json
 import os, sys
-import pprint
 from netboxapi_client import Api, create, show, enum, delete, update, patch
 import urllib3
 
+# == Helpers
+#
 def get_configuration(path="{}/netboxapi.json".format(os.getcwd())):
     """get_configuration
 
@@ -27,6 +28,33 @@ def get_configuration(path="{}/netboxapi.json".format(os.getcwd())):
           print("Configuration not properly defined.")
         sys.exit(254)
 
+
+def get_data(path):
+    """get_data
+    Opens and reads a JSON file.
+    :param path:
+    :returns: data dict
+    """
+    try:
+        with open(path) as fd:
+            return json.load(fd)
+ 
+    except Exception:
+        print("No json file found at {}.".format(path))
+        sys.exit(254)
+    
+
+
+def print_json(obj):
+    print( json.dumps(
+        obj,
+        sort_keys=True,
+        indent=4, separators=(',', ': ')
+    ))
+
+
+# == Main script
+#
 def main():
     parser = argparse.ArgumentParser()
 
@@ -136,14 +164,15 @@ def main():
     ns = parser.parse_args()
     if 'action' in ns:
         if 'data' in ns and ns.data:
-                pprint(
+                data = get_data(ns.data)
+                print_json(
                     FUNCTION_MAP[ns.action](
                         api=api,
                         model=ns.model,
                         obj=ns.object,
                         ident=ns.id,
                         name=ns.name,
-                        data=json.loads(ns.data)
+                        data=data
                     )
                 )
         else:
