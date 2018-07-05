@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+#
+#
+
+# == Vars
+#
+# Hub.docker.io
+DOCKER_REGISTRY=""
+DOCKER_IMAGE="netboxapi_client"
+DOCKER_IMAGE_TAG="latest"
+
+
+# == Run vars
+#
+docker_image="${DOCKER_REGISTRY}${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}"
+docker_cmd="$@"
+docker_args="--rm -it --net=host"
+
+
+# == Run
+#
+# Test if image exists, build otherwhise
+image_id="$(docker image ls ${docker_image})"
+[[ -z "${image_id}" ]] \
+  && docker build \
+    -t ${docker_image} \
+    .
+
+[ "${docker_cmd}" == "shell" ] \
+  && docker_args="${docker_args} --entrypoint /bin/sh" \
+  && docker_cmd=''
+
+
+docker run \
+  --volume=${PWD}/netboxapi.json:/app/netboxapi.json \
+  --volume=${PWD}:${PWD} \
+  --workdir=${PWD} \
+  ${docker_args} \
+  ${docker_image} ${docker_cmd}
