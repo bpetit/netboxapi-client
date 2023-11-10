@@ -1,8 +1,7 @@
 .. image:: https://travis-ci.org/bpetit/netboxapi-client.svg?branch=master
 
-
-netboxapi-client
-================
+netboxapi-client - WARNING : THIS PROJECT IS NOT MAINTAINED ANYMORE, PLEASE FORK IF YOU WANT TO IMPROVE IT :)
+=============================================================================================================
 
 This is a python client for netbox (https://github.com/digitalocean/netbox) API. It can be used either as a python module/library or directly from the command line.
 The goal of this project is to provide a simple way to automate infrastructure documentation based on the REST API from that great project that is Netbox.
